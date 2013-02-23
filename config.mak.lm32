@@ -8,7 +8,7 @@ libdir = $(prefix)/lib
 includedir = $(prefix)/include
 syslibdir = /lib
 CC = clang
-CFLAGS= -Wa,-I./crt/lm32 -march=lm32 -target lm32 -Os -pipe -ccc-gcc-name lm32-rtems4.11-gcc -fomit-frame-pointer -fno-unwind-tables -fno-asynchronous-unwind-tables -Wa,--noexecstack -fno-stack-protector -g
+CFLAGS= -DMICO32_EMB -Wa,-I./crt/lm32 -march=lm32 -target lm32 -Os -pipe -ccc-gcc-name lm32-rtems4.11-gcc -fomit-frame-pointer -fno-unwind-tables -fno-asynchronous-unwind-tables -Wa,--noexecstack -fno-stack-protector -g
 CFLAGS_C99FSE = -std=c99 -nostdinc -ffreestanding 
 CPPFLAGS = 
 LDFLAGS = -Wl,--hash-style=both 
