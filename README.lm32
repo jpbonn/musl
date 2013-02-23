@@ -1,0 +1,9 @@
+
+
+copy config.mak.lm32 to config.mak.
+
+edit config.mak paths as needed.
+
+make
+
+make install
