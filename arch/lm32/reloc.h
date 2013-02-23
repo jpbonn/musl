@@ -12,11 +12,11 @@ static inline void do_single_reloc(
 	Sym *sym, size_t sym_size,
 	struct symdef def, size_t sym_val)
 {
-	assert(0 && "Unimplemented");
+	exit(1);
 }
 
 #include "syscall.h"
 void __reloc_self(int c, size_t *a, size_t *dynv)
 {
-	assert(0 && "Unimplemented");
+	exit(1);
 }

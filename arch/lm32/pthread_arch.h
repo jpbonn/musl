@@ -1,6 +1,6 @@
 static inline struct pthread *__pthread_self()
 {
-	assert(0 && "Unimplemented");
+	exit(1);
 	return NULL;
 }
 

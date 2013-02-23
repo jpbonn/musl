@@ -18,8 +18,10 @@ void __init_libc(char **envp)
 	__hwcap = aux[AT_HWCAP];
 	__sysinfo = aux[AT_SYSINFO];
 
+#ifndef MICO32_EMB        
 	__init_tls(aux);
 	__init_security(aux);
+#endif
 }
 
 int __libc_start_main(

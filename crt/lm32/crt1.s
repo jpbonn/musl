@@ -110,6 +110,16 @@ __restart_board:
 	bi      .clearBSS
  
 .callMain:
+	# initialize sbrk to point to the top of the data section
+        mvhi    r1, hi(_end)
+        ori     r1, r1, lo(_end)
+        mvhi    r2, hi(_sbrk_top)
+        ori     r2, r2, lo(_sbrk_top)
+	sw	(r2 + 0),r1	
+        mvhi    r2, hi(_sbrk_top_initial)
+        ori     r2, r2, lo(_sbrk_top_initial)
+	sw	(r2 + 0),r1	
+	
         # set qemu test name  (this forces text section)
 	test_name MAIN
         # Call _libc_start_main(main, argc, argv, init, fini, ldso_fini)
@@ -127,3 +137,22 @@ __restart_board:
         mvi     r5, 0             # fini is 0
         mvi     r6, 0             # ldso_fini is 0
         calli   __libc_start_main # doesn't return
+
+# crt1.S is always linked in forst so we define
+# abort here so libc abort does not get linked in too.
+.global abort
+abort:
+        tc_fail
+        end
+        bi .
+
+
+.section    .data
+	.align 4
+	.global _sbrk_top_initial
+	.global _sbrk_top
+_sbrk_top_initial:
+	.word 0xdeadbeef 
+_sbrk_top:
+	.word 0xdeadbeef
+
